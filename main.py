@@ -188,7 +188,9 @@ def simulando_confrontos_quartas_de_final(classificados):
     
     # TODO : Imprimir os " resultados " dos confrontos realizados nas Quartas de Final:    
     classificados_para_semifinal(classificados_na_quartas)
-    
+    resultado_classificacao_semifinal(classificados_na_quartas)
+    simulando_confrontos_semifinal(classificados_na_quartas)
+
     return 0 
 
 def classificados_para_semifinal(classificados):
@@ -200,7 +202,6 @@ def classificados_para_semifinal(classificados):
         for selecao_motivada in selecoes_motivadas:
             print(f"{selecao_motivada.selecao} ", end="")
         print()
-    confrontos_da_semifinal(classificados)
 
 def confrontos_da_semifinal(classificados):
     print("-"*50)
@@ -208,38 +209,55 @@ def confrontos_da_semifinal(classificados):
     
     print(f'1ª SEMIFINAL: {classificados[1][0].selecao} X {classificados[3][0].selecao}')
     print(f'2ª SEMIFINAL: {classificados[2][0].selecao} X {classificados[4][0].selecao}')
-    
-    print("-"*50)
+  
 
 def resultado_classificacao_semifinal(classificacao):
     # TODO : Imprimir os grupos , ordenados pelas melhores seleções de cada (apenas 2 se classificam)
     # Simulação da Tabela final dos confrontos das seleções nas fases de grupo
     print("-"*50)
-    print("Simulação da Tabela final dos confrontos das seleções nas fases de grupo")
+    print("Simulação da tabela final dos confrontos das seleções para chegar as semifinais com a pontuação")
     for grupo, selecoes_motivadas in classificacao.items():
         print(f"GRUPO {grupo}: ", end="")
         for selecao_motivada in selecoes_motivadas:
             print(f"{selecao_motivada.selecao} - Última motivação: ({selecao_motivada.ultimaMotivacao:.2f}) ", end="")
         print()
-def simulando_confrontos_semifinal():
+
+    confrontos_da_semifinal(classificacao)
+
+def simulando_confrontos_semifinal(classificados):
     # TODO : Simular os confrontos das Semifinais (randomizando novamente suas respectivas motivações).
     # Além disso, também definir os classificados para a final e disputa de 3º e 4º em novas vaiáveis:
+    semifinalista1 = classificados[1][0]
+    semifinalista2 = classificados[2][0]
+    semifinalista3 = classificados[3][0]
+    semifinalista4 = classificados[4][0]
+    
+    semifinal1 = semifinalista1 if semifinalista1.motivacao_para_o_time_para_a_partida() > semifinalista3.motivacao_para_o_time_para_a_partida() else semifinalista3
+    semifinal2 = semifinalista2 if semifinalista2.motivacao_para_o_time_para_a_partida() > semifinalista4.motivacao_para_o_time_para_a_partida() else semifinalista4
+        
     # TODO : Imprimir os " resultados " dos confrontos realizados nas Semifinais:
+    confrontos_da_final(semifinal1,semifinal2)
+    simulando_confronto_final(semifinal1,semifinal2)
+    return 0
+
+def confrontos_da_final(finalista1,finalista2):
+    print("-"*50)
+    print("Os confrontos da FINAL")
+    print(f'{finalista1.selecao} X {finalista2.selecao}')    
+
+def simulando_confronto_final(finalista1,finalista2):
+    # TODO : Simular os confrontos das Finais (randomizando novamente suas respectivas motivações) .
+    # Além disso, também definir os 4 primeiros colocamos da Copa do Mundo de 2022:
+    campeao = finalista1 if finalista1.motivacao_para_o_time_para_a_partida() > finalista2.motivacao_para_o_time_para_a_partida() else finalista2
+    o_grande_campeao_da_copa_do_mundo(campeao)
 
     return 0
 
-def simulando_confronto_final():
-    # TODO : Simular os confrontos das Finais (randomizando novamente suas respectivas motivações) .
-    # Além disso, também definir os 4 primeiros colocamos da Copa do Mundo de 2022:
-
-    return "BRASIL"
-
-
-def criar_classe_selecao():
-    pass
-
-def campeao():
-    return "Brasil"
+def o_grande_campeao_da_copa_do_mundo(campeao):
+    print("-"*50)
+    print("O GRANDE CAMPEÃO DA COPA DO MUNDO DE 2022 NO CATAR É:")
+    print(f'{campeao.selecao}')    
+    print("-"*50)
 
 
 
