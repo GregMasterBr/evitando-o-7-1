@@ -32,13 +32,25 @@ class Selecao:
 
         return self.ultimaMotivacao
 
+
+def resultado_classificacao_fase_grupos(classificacao):
+    # TODO : Imprimir os grupos , ordenados pelas melhores seleções de cada (apenas 2 se classificam)
+    # Simulação da Tabela final dos confrontos das seleções nas fases de grupo
+    print("-"*50)
+    print("Simulação da Tabela final dos confrontos das seleções nas fases de grupo")
+    for grupo, selecoes_motivadas in classificacao.items():
+        print(f"GRUPO {grupo}: ", end="")
+        for selecao_motivada in selecoes_motivadas:
+            print(f"{selecao_motivada.selecao} - Última motivação: ({selecao_motivada.ultimaMotivacao:.2f}) ", end="")
+        print()
+
+
 def simulando_confrontos_fase_de_grupos():
     #Mapa em que a chave será a letra do grupo e o valor as seleções ( que ordenaremos pelas " melhores ").
     melhoresSelecoesPorGrupo = {}
 
-    # Percorre a dataframe ( dados do CSV ) para criar nossos objetos / seleções .
+    # Percorre a dataframe (dados do CSV) para criar nossos objetos / seleções .
     df = ler_csv_copa_mundo()
-
     for grupo , selecao_ in df.items():
         # print("GRUPO ", grupo)
         # print (selecao_)
@@ -52,17 +64,17 @@ def simulando_confrontos_fase_de_grupos():
             [Selecao(selecao_[0]),Selecao(selecao_[1]),Selecao(selecao_[2]),Selecao(selecao_[3])],
             key=Selecao.motivacao_para_o_time_para_a_partida,
             reverse=True)        
+    
     # TODO : Imprimir os grupos , ordenados pelas melhores seleções de cada (apenas 2 se classificam)
-    # Simulação da Tabela final dos confrontos das seleções nas fases de grupo
-    for grupo, selecoes_motivadas in melhoresSelecoesPorGrupo.items():
-        print(f"GRUPO {grupo}: ", end="")
-        for selecao_motivada in selecoes_motivadas:
-            print(f"{selecao_motivada.selecao} - Última motivação: ({selecao_motivada.ultimaMotivacao:.2f}) ", end="")
-        print()
+    # Simulação da Tabela final dos confrontos das seleções nas fases de grupo    
+    resultado_classificacao_fase_grupos(melhoresSelecoesPorGrupo)    
+    simulando_confrontos_oitavas_de_final(melhoresSelecoesPorGrupo)
 
-def simulando_confrontos_oitavas_de_final():
+
+def simulando_confrontos_oitavas_de_final(classificacao):
+    #RENOVAR A MOTIVAÇÃO DOS TIMES PARA AS OITAVAS DE FINAL
     # Criando vaiáveis para as 2 melhores seleções de cada grupo :
-    melhoresSelecoesPorGrupo = { }
+    melhoresSelecoesPorGrupo = classificacao
 
     team1A = melhoresSelecoesPorGrupo["A"][0]
     team2A = melhoresSelecoesPorGrupo["A"][1]
@@ -87,11 +99,45 @@ def simulando_confrontos_oitavas_de_final():
     
     team1H = melhoresSelecoesPorGrupo["H"][0]
     team2H = melhoresSelecoesPorGrupo["H"][1]
-    
+              
     # TODO : Simular os confrontos das Oitavas de Final (randomizando novamente suas respectivas motivações) .
     # Além disso, também definir os classificados para as quartas de final em novas vaiáveis:    
     
+    chaveamento_quartas_finais_AB_1 = team1A if team1A.motivacao_para_o_time_para_a_partida() > team2B.motivacao_para_o_time_para_a_partida() else team2B
+    chaveamento_quartas_finais_AB_2 = team2A if team2A.motivacao_para_o_time_para_a_partida() > team1B.motivacao_para_o_time_para_a_partida() else team1B
+
+    chaveamento_quartas_finais_CD_1 = team1C if team1C.motivacao_para_o_time_para_a_partida() > team2D.motivacao_para_o_time_para_a_partida() else team2D
+    chaveamento_quartas_finais_CD_2 = team2C if team2C.motivacao_para_o_time_para_a_partida() > team1D.motivacao_para_o_time_para_a_partida() else team1D
+
+    chaveamento_quartas_finais_EF_1 = team1E if team1E.motivacao_para_o_time_para_a_partida() > team2F.motivacao_para_o_time_para_a_partida() else team2F
+    chaveamento_quartas_finais_EF_2 = team2E if team2E.motivacao_para_o_time_para_a_partida() > team1F.motivacao_para_o_time_para_a_partida() else team1F
+
+    chaveamento_quartas_finais_GH_1 = team1G if team1G.motivacao_para_o_time_para_a_partida() > team2H.motivacao_para_o_time_para_a_partida() else team2H
+    chaveamento_quartas_finais_GH_2 = team2G if team2G.motivacao_para_o_time_para_a_partida() > team1H.motivacao_para_o_time_para_a_partida() else team1H
+    
+    classificados_na_oitavas = {}
+
+    classificados_na_oitavas[1] = [chaveamento_quartas_finais_AB_1]
+    classificados_na_oitavas[2] = [chaveamento_quartas_finais_AB_2]
+    classificados_na_oitavas[3] = [chaveamento_quartas_finais_CD_1]
+    classificados_na_oitavas[4] = [chaveamento_quartas_finais_CD_2]
+    classificados_na_oitavas[5] = [chaveamento_quartas_finais_EF_1]
+    classificados_na_oitavas[6] = [chaveamento_quartas_finais_EF_2]
+    classificados_na_oitavas[7] = [chaveamento_quartas_finais_GH_1]
+    classificados_na_oitavas[8] = [chaveamento_quartas_finais_GH_2]
+
+    resultado_classificacao_oitavas_de_final(classificados_na_oitavas)
     return 0
+
+def resultado_classificacao_oitavas_de_final(classificados):
+    print("-"*50)
+    print("Simulação da tabela dos das seleções classificados para as Quartas de final")
+    for chave, selecoes_motivadas in classificados.items():
+        print(f"CHAVE {chave}: ", end="")
+        for selecao_motivada in selecoes_motivadas:
+            print(f"{selecao_motivada.selecao} - Última motivação: ({selecao_motivada.ultimaMotivacao:.2f}) ", end="")
+        print()
+    
 
 def simulando_confrontos_quartas_de_final():
     # TODO : Simular os confrontos das Quartas de Final (randomizando novamente suas respectivas motivações).
