@@ -133,6 +133,16 @@ def simulando_confrontos_oitavas_de_final(classificacao):
 
     chaveamento_oitavas_finais_GH_1 = team1G if team1G.motivacao_para_o_time_para_a_partida() > team2H.motivacao_para_o_time_para_a_partida() else team2H
     chaveamento_oitavas_finais_GH_2 = team2G if team2G.motivacao_para_o_time_para_a_partida() > team1H.motivacao_para_o_time_para_a_partida() else team1H
+    print("-"*50)
+    print("RESULTADO DOS CONFRONTO DAS OITAVAS DE FINAIS")
+    print(f'{team1A.selecao} ({team1A.ultimaMotivacao:.2f}) x {team2B.selecao } ({ team2B.ultimaMotivacao:.2f})')
+    print(f'{team1C.selecao} ({team1C.ultimaMotivacao:.2f}) x {team2D.selecao } ({ team2D.ultimaMotivacao:.2f})')
+    print(f'{team1E.selecao} ({team1E.ultimaMotivacao:.2f}) x {team2F.selecao } ({ team2F.ultimaMotivacao:.2f})')
+    print(f'{team1G.selecao} ({team1G.ultimaMotivacao:.2f}) x {team2H.selecao } ({ team2H.ultimaMotivacao:.2f})')
+    print(f'{team1B.selecao} ({team1B.ultimaMotivacao:.2f}) x {team2A.selecao } ({ team2A.ultimaMotivacao:.2f})')
+    print(f'{team1D.selecao} ({team1D.ultimaMotivacao:.2f}) x {team2C.selecao } ({ team2C.ultimaMotivacao:.2f})')
+    print(f'{team1F.selecao} ({team1F.ultimaMotivacao:.2f}) x {team2E.selecao } ({ team2E.ultimaMotivacao:.2f})')
+    print(f'{team1H.selecao} ({team1H.ultimaMotivacao:.2f}) x {team2G.selecao } ({ team2G.ultimaMotivacao:.2f})')    
     
     classificados_na_oitavas = {}
 
@@ -149,6 +159,7 @@ def simulando_confrontos_oitavas_de_final(classificacao):
     simulando_confrontos_quartas_de_final(classificados_na_oitavas)
 
     return 0
+
 
 def resultado_classificacao_oitavas_de_final(classificados):
     print("-"*50)
@@ -207,8 +218,8 @@ def confrontos_da_semifinal(classificados):
     print("-"*50)
     print("Os confrontos da semifinal")
     
-    print(f'1ª SEMIFINAL: {classificados[1][0].selecao} X {classificados[3][0].selecao}')
-    print(f'2ª SEMIFINAL: {classificados[2][0].selecao} X {classificados[4][0].selecao}')
+    print(f'1ª SEMIFINAL: {classificados[1][0].selecao} ({classificados[1][0].ultimaMotivacao:.2f}) X {classificados[3][0].selecao} ({classificados[3][0].ultimaMotivacao:.2f})')
+    print(f'2ª SEMIFINAL: {classificados[2][0].selecao} ({classificados[2][0].ultimaMotivacao:.2f}) X {classificados[4][0].selecao} ({classificados[4][0].ultimaMotivacao:.2f})')
   
 
 def resultado_classificacao_semifinal(classificacao):
