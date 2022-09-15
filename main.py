@@ -1,11 +1,19 @@
 import pandas as pd 
-def  ler_csv_copa_mundo():
-    df = pd.read_csv('data-grupo-copa-ranking-fifa.csv')
-    #print(df.head())
-    return df
+import random 
 
-class Selecoes:
+def  ler_csv_copa_mundo():
+    return pd.read_csv('data-grupo-copa-ranking-fifa.csv')
+
+
+class Selecao:
+    MELHOR_SCORE = 1837.6 #Score do Brasil
+
     # TODO: Definir um construtor com os atributos adequados tendo em vista o conteúdo de uma célula do CSV 
+    def __init__(self,dadosCelula):
+        #self.selecao, self.score = dadosCelula.split('|')
+        dadosSelecao=dadosCelula.split('|')
+        self.selecao = dadosSelecao[0]
+        self.score = float(dadosSelecao[1])
 
     def motivacao_para_o_time_para_a_partida(self):
         """
@@ -15,24 +23,41 @@ class Selecoes:
         Por outro lado, BRA teria 70-100 (maior chance de vitória).
         """
         # TODO : Com base no comentário / insight acima, criar uma lógica para atribuir a motivação ao time .
-        
-        return 0.0
+        """
+        Regra de 3 para criar a lógica da randomizar a probabilidade de chance de um time vencer dentro de um padrão aceitável.  
+         1837.6 (BRA) ------ 100%
+         1393.5 (GAN) ------  X%
+        """
+        self.ultimaMotivacao = random.uniform(70,(self.score * 100) / Selecao.MELHOR_SCORE)
+
+        return self.ultimaMotivacao
 
 def simulando_confrontos_fase_de_grupos():
     #Mapa em que a chave será a letra do grupo e o valor as seleções ( que ordenaremos pelas " melhores ").
-    melhoresSelecoesPorGrupo = { }
+    melhoresSelecoesPorGrupo = {}
+
     # Percorre a dataframe ( dados do CSV ) para criar nossos objetos / seleções .
     df = ler_csv_copa_mundo()
 
-    for grupo , selecoes in df.items():
-        print("GRUPO ", grupo)
-        print (selecoes)
-    
-    # TODO : Instanciar as 4 seleções do grupo , com seus respectivos nomes e score .
-    # TODO : Simular os melhores do grupo com base na motivação de cada seleção .
-    # Calculada a partir do seu ranking FIFA aliado a uma pitada de aleatoriedade .
-    
+    for grupo , selecao_ in df.items():
+        # print("GRUPO ", grupo)
+        # print (selecao_)
+        # TODO : Instanciar as 4 seleções do grupo , com seus respectivos nomes e score .
+        sel1, sel2,sel3,sel4 = Selecao(selecao_[0]),Selecao(selecao_[1]),Selecao(selecao_[2]),Selecao(selecao_[3])
+        
+        # TODO : Simular os melhores do grupo com base na motivação de cada seleção .
+        # Calculada a partir do seu ranking FIFA aliado a uma pitada de aleatoriedade .
+        # Vai ordenar os times da ordem reversa. Do maior para o menor.
+        melhoresSelecoesPorGrupo[grupo] = sorted(
+            [Selecao(selecao_[0]),Selecao(selecao_[1]),Selecao(selecao_[2]),Selecao(selecao_[3])],
+            key=Selecao.motivacao_para_o_time_para_a_partida,
+            reverse=True)        
     # TODO : Imprimir os grupos , ordenados pelas melhores seleções de cada (apenas 2 se classificam)    
+    for grupo, selecoes_motivadas in melhoresSelecoesPorGrupo.items():
+        print(f"GRUPO {grupo}: ", end="")
+        for selecao_motivada in selecoes_motivadas:
+            print(f"{selecao_motivada.selecao} - Última motivação: ({selecao_motivada.ultimaMotivacao})", end="")
+        print()
 
 def simulando_confrontos_oitavas_de_final():
     # Criando vaiáveis para as 2 melhores seleções de cada grupo :
@@ -97,5 +122,4 @@ def campeao():
 
 
 if __name__ == "__main__":    
-    print(campeao())
     simulando_confrontos_fase_de_grupos()
