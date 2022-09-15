@@ -249,12 +249,13 @@ def simulando_confrontos_semifinal(classificados):
     semifinalista3 = classificados[3][0]
     semifinalista4 = classificados[4][0]
     
-    semifinal1 = semifinalista1 if semifinalista1.motivacao_para_o_time_para_a_partida() > semifinalista3.motivacao_para_o_time_para_a_partida() else semifinalista3
-    semifinal2 = semifinalista2 if semifinalista2.motivacao_para_o_time_para_a_partida() > semifinalista4.motivacao_para_o_time_para_a_partida() else semifinalista4
+    final1 = semifinalista1 if semifinalista1.motivacao_para_o_time_para_a_partida() > semifinalista3.motivacao_para_o_time_para_a_partida() else semifinalista3
+    final2 = semifinalista2 if semifinalista2.motivacao_para_o_time_para_a_partida() > semifinalista4.motivacao_para_o_time_para_a_partida() else semifinalista4
         
     # TODO : Imprimir os " resultados " dos confrontos realizados nas Semifinais:
-    confrontos_da_final(semifinal1,semifinal2)
-    simulando_confronto_final(semifinal1,semifinal2)
+    confrontos_da_final(final1,final2)
+    simulando_confronto_final(final1,final2)
+
     return 0
 
 def confrontos_da_final(finalista1,finalista2):
