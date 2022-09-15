@@ -122,17 +122,15 @@ def simulando_confrontos_oitavas_de_final(classificacao):
     # TODO : Simular os confrontos das Oitavas de Final (randomizando novamente suas respectivas motivações) .
     # Além disso, também definir os classificados para as quartas de final em novas vaiáveis:    
     
-    chaveamento_oitavas_finais_AB_1 = team1A if team1A.motivacao_para_o_time_para_a_partida() > team2B.motivacao_para_o_time_para_a_partida() else team2B
-    chaveamento_oitavas_finais_AB_2 = team2A if team2A.motivacao_para_o_time_para_a_partida() > team1B.motivacao_para_o_time_para_a_partida() else team1B
-
-    chaveamento_oitavas_finais_CD_1 = team1C if team1C.motivacao_para_o_time_para_a_partida() > team2D.motivacao_para_o_time_para_a_partida() else team2D
-    chaveamento_oitavas_finais_CD_2 = team2C if team2C.motivacao_para_o_time_para_a_partida() > team1D.motivacao_para_o_time_para_a_partida() else team1D
-
-    chaveamento_oitavas_finais_EF_1 = team1E if team1E.motivacao_para_o_time_para_a_partida() > team2F.motivacao_para_o_time_para_a_partida() else team2F
-    chaveamento_oitavas_finais_EF_2 = team2E if team2E.motivacao_para_o_time_para_a_partida() > team1F.motivacao_para_o_time_para_a_partida() else team1F
-
-    chaveamento_oitavas_finais_GH_1 = team1G if team1G.motivacao_para_o_time_para_a_partida() > team2H.motivacao_para_o_time_para_a_partida() else team2H
-    chaveamento_oitavas_finais_GH_2 = team2G if team2G.motivacao_para_o_time_para_a_partida() > team1H.motivacao_para_o_time_para_a_partida() else team1H
+    chaveamento_oitavas_finais1 = team1A if team1A.motivacao_para_o_time_para_a_partida() > team2B.motivacao_para_o_time_para_a_partida() else team2B
+    chaveamento_oitavas_finais2 = team1C if team1C.motivacao_para_o_time_para_a_partida() > team2D.motivacao_para_o_time_para_a_partida() else team2D
+    chaveamento_oitavas_finais3 = team1E if team1E.motivacao_para_o_time_para_a_partida() > team2F.motivacao_para_o_time_para_a_partida() else team2F
+    chaveamento_oitavas_finais4 = team1G if team1G.motivacao_para_o_time_para_a_partida() > team2H.motivacao_para_o_time_para_a_partida() else team2H    
+    chaveamento_oitavas_finais5 = team1B if team1B.motivacao_para_o_time_para_a_partida() > team2A.motivacao_para_o_time_para_a_partida() else team2A
+    chaveamento_oitavas_finais6 = team1D if team1D.motivacao_para_o_time_para_a_partida() > team2C.motivacao_para_o_time_para_a_partida() else team2C
+    chaveamento_oitavas_finais7 = team1F if team1F.motivacao_para_o_time_para_a_partida() > team2E.motivacao_para_o_time_para_a_partida() else team2E
+    chaveamento_oitavas_finais8 = team1H if team1H.motivacao_para_o_time_para_a_partida() > team2G.motivacao_para_o_time_para_a_partida() else team2G
+    
     print("-"*50)
     print("RESULTADO DOS CONFRONTO DAS OITAVAS DE FINAIS")
     print(f'{team1A.selecao} ({team1A.ultimaMotivacao:.2f}) x {team2B.selecao } ({ team2B.ultimaMotivacao:.2f})')
@@ -146,14 +144,14 @@ def simulando_confrontos_oitavas_de_final(classificacao):
     
     classificados_na_oitavas = {}
 
-    classificados_na_oitavas[1] = [chaveamento_oitavas_finais_AB_1]
-    classificados_na_oitavas[2] = [chaveamento_oitavas_finais_CD_1]
-    classificados_na_oitavas[3] = [chaveamento_oitavas_finais_EF_1]
-    classificados_na_oitavas[4] = [chaveamento_oitavas_finais_GH_1]    
-    classificados_na_oitavas[5] = [chaveamento_oitavas_finais_AB_2]
-    classificados_na_oitavas[6] = [chaveamento_oitavas_finais_CD_2]
-    classificados_na_oitavas[7] = [chaveamento_oitavas_finais_EF_2]
-    classificados_na_oitavas[8] = [chaveamento_oitavas_finais_GH_2]
+    classificados_na_oitavas[1] = [chaveamento_oitavas_finais1]
+    classificados_na_oitavas[2] = [chaveamento_oitavas_finais2]
+    classificados_na_oitavas[3] = [chaveamento_oitavas_finais3]
+    classificados_na_oitavas[4] = [chaveamento_oitavas_finais4]    
+    classificados_na_oitavas[5] = [chaveamento_oitavas_finais5]
+    classificados_na_oitavas[6] = [chaveamento_oitavas_finais6]
+    classificados_na_oitavas[7] = [chaveamento_oitavas_finais7]
+    classificados_na_oitavas[8] = [chaveamento_oitavas_finais8]
 
     resultado_classificacao_oitavas_de_final(classificados_na_oitavas)
     simulando_confrontos_quartas_de_final(classificados_na_oitavas)
@@ -190,6 +188,14 @@ def simulando_confrontos_quartas_de_final(classificados):
     chaveamento_quartas_finais_5_6 = selecao5 if selecao5.motivacao_para_o_time_para_a_partida() > selecao6.motivacao_para_o_time_para_a_partida() else selecao6
     chaveamento_quartas_finais_7_8 = selecao7 if selecao7.motivacao_para_o_time_para_a_partida() > selecao8.motivacao_para_o_time_para_a_partida() else selecao8
    
+    print("-"*50)
+    print("RESULTADO DOS CONFRONTO DAS QUARTAS DE FINAIS")
+    print(f'{selecao1.selecao} ({selecao1.ultimaMotivacao:.2f}) x {selecao2.selecao} ({selecao2.ultimaMotivacao:.2f})')
+    print(f'{selecao3.selecao} ({selecao3.ultimaMotivacao:.2f}) x {selecao4.selecao } ({selecao4.ultimaMotivacao:.2f})')
+    print(f'{selecao5.selecao} ({selecao5.ultimaMotivacao:.2f}) x {selecao6.selecao } ({selecao6.ultimaMotivacao:.2f})')
+    print(f'{selecao7.selecao} ({selecao7.ultimaMotivacao:.2f}) x {selecao8.selecao } ({selecao8.ultimaMotivacao:.2f})')
+
+
     # Além disso, também definir os classificados para as semifinais em novas vaiáveis:
     classificados_na_quartas = {}
     classificados_na_quartas[1] = [chaveamento_quartas_finais_1_2]
