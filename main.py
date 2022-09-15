@@ -52,11 +52,12 @@ def simulando_confrontos_fase_de_grupos():
             [Selecao(selecao_[0]),Selecao(selecao_[1]),Selecao(selecao_[2]),Selecao(selecao_[3])],
             key=Selecao.motivacao_para_o_time_para_a_partida,
             reverse=True)        
-    # TODO : Imprimir os grupos , ordenados pelas melhores seleções de cada (apenas 2 se classificam)    
+    # TODO : Imprimir os grupos , ordenados pelas melhores seleções de cada (apenas 2 se classificam)
+    # Simulação da Tabela final dos confrontos das seleções nas fases de grupo
     for grupo, selecoes_motivadas in melhoresSelecoesPorGrupo.items():
         print(f"GRUPO {grupo}: ", end="")
         for selecao_motivada in selecoes_motivadas:
-            print(f" {selecao_motivada.selecao} - Última motivação: ({selecao_motivada.ultimaMotivacao:.2f})", end="")
+            print(f"{selecao_motivada.selecao} - Última motivação: ({selecao_motivada.ultimaMotivacao:.2f}) ", end="")
         print()
 
 def simulando_confrontos_oitavas_de_final():
