@@ -56,7 +56,7 @@ def simulando_confrontos_fase_de_grupos():
     for grupo, selecoes_motivadas in melhoresSelecoesPorGrupo.items():
         print(f"GRUPO {grupo}: ", end="")
         for selecao_motivada in selecoes_motivadas:
-            print(f"{selecao_motivada.selecao} - Última motivação: ({selecao_motivada.ultimaMotivacao})", end="")
+            print(f" {selecao_motivada.selecao} - Última motivação: ({selecao_motivada.ultimaMotivacao:.2f})", end="")
         print()
 
 def simulando_confrontos_oitavas_de_final():
