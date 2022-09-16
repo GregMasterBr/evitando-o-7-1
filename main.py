@@ -249,12 +249,32 @@ def simulando_confrontos_semifinal(classificados):
     semifinalista3 = classificados[3][0]
     semifinalista4 = classificados[4][0]
     
-    final1 = semifinalista1 if semifinalista1.motivacao_para_o_time_para_a_partida() > semifinalista3.motivacao_para_o_time_para_a_partida() else semifinalista3
-    final2 = semifinalista2 if semifinalista2.motivacao_para_o_time_para_a_partida() > semifinalista4.motivacao_para_o_time_para_a_partida() else semifinalista4
+    if semifinalista1.motivacao_para_o_time_para_a_partida() > semifinalista3.motivacao_para_o_time_para_a_partida():
+        final1=semifinalista1
+        perdedor1=semifinalista3
+    else:
+        final1=semifinalista3
+        perdedor1=semifinalista1
+    
+    if semifinalista2.motivacao_para_o_time_para_a_partida() > semifinalista4.motivacao_para_o_time_para_a_partida():
+        final2=semifinalista2
+        perdedor2=semifinalista4
+    else:
+        final2=semifinalista2
+        perdedor2=semifinalista4
+    
+    #final2,perdedor2 = semifinalista2,semifinalista4 if semifinalista2.motivacao_para_o_time_para_a_partida() > semifinalista4.motivacao_para_o_time_para_a_partida() else semifinalista4,semifinalista2
         
     # TODO : Imprimir os " resultados " dos confrontos realizados nas Semifinais:
+    disputa_para_3_e4_lugar(perdedor1,perdedor2)
+    disputa_3_lugar=simulando_confronto_3_e_4_lugar(perdedor1,perdedor2)
+    
     confrontos_da_final(final1,final2)
-    simulando_confronto_final(final1,final2)
+    disputa_final=simulando_confronto_final(final1,final2)
+    
+    classificacao_geral = disputa_final + disputa_3_lugar
+    for i in range(1,len(classificacao_geral)+1):
+        print(f'{i}º - {classificacao_geral[i-1].selecao}')
 
     return 0
 
@@ -266,10 +286,39 @@ def confrontos_da_final(finalista1,finalista2):
 def simulando_confronto_final(finalista1,finalista2):
     # TODO : Simular os confrontos das Finais (randomizando novamente suas respectivas motivações) .
     # Além disso, também definir os 4 primeiros colocamos da Copa do Mundo de 2022:
-    campeao = finalista1 if finalista1.motivacao_para_o_time_para_a_partida() > finalista2.motivacao_para_o_time_para_a_partida() else finalista2
+    
+    #campeao,vice = finalista1,finalista2 if finalista1.motivacao_para_o_time_para_a_partida() > finalista2.motivacao_para_o_time_para_a_partida() else finalista2,finalista1
+    if finalista1.motivacao_para_o_time_para_a_partida() > finalista2.motivacao_para_o_time_para_a_partida():
+        campeao=finalista1
+        vice=finalista2
+    else:
+        campeao=finalista2
+        vice=finalista1    
+
     o_grande_campeao_da_copa_do_mundo(campeao)
 
-    return 0
+    return [campeao,vice]
+
+def disputa_para_3_e4_lugar(perdedor1,perdedor2):
+    print("-"*50)
+    print("A disputa entre o 3º e 4º lugar da Copa do Mundo será: ")
+    print(f'{perdedor1.selecao} X {perdedor2.selecao}')  
+     
+
+def simulando_confronto_3_e_4_lugar(perdedor1,perdedor2):
+    # TODO : Simular os confrontos das Finais (randomizando novamente suas respectivas motivações) .
+    # Além disso, também definir os 4 primeiros colocamos da Copa do Mundo de 2022:
+    #O_3_colocado,O_4_colocado = perdedor1,perdedor2 if perdedor1.motivacao_para_o_time_para_a_partida() > perdedor2.motivacao_para_o_time_para_a_partida() else perdedor1,perdedor2
+    if perdedor1.motivacao_para_o_time_para_a_partida() > perdedor2.motivacao_para_o_time_para_a_partida():
+        O_3_colocado = perdedor1
+        O_4_colocado = perdedor2
+    else:
+        O_3_colocado = perdedor2
+        O_4_colocado = perdedor1
+
+    print(f"O 3º colocado da Copa do Mundo é: {O_3_colocado.selecao}")
+    return [O_3_colocado,O_4_colocado]
+
 
 def o_grande_campeao_da_copa_do_mundo(campeao):
     print("-"*50)
